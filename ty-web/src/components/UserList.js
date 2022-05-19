@@ -7,14 +7,18 @@ export default class userList extends Component {
         super();
         this.state = {}
     }
+
+    delete = (id) => {
+        fetch('http://localhost:8080/api/users/' + id, {
+            method: 'delete'
+        }).then(response => response.json()).then(users => {this.setState({users})});
+    }
     async componentDidMount() {
-        console.log("sadas");
         let users = await (await fetch(`http://localhost:8080/api/users`)).json();//主要是从后台拿json数据
         this.setState({users});
     }
     render() {
         let {users = []} = this.state;
-
         return (
             <div>
                 <table className='table'>
@@ -38,9 +42,9 @@ export default class userList extends Component {
                             <td>{telephone}</td>
                             <td>{email}</td>
                             <td>{job}</td>
-                            <td><Button onClick = {() => {
-                                this.setState({users});
-                            }}>配置</Button></td>
+                            <td>
+                                <Button onClick={() => this.delete(uid)}>删除</Button>
+                            </td>
                         </tr>
                     )}
                     </tbody>

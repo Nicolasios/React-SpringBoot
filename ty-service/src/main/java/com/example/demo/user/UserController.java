@@ -18,8 +18,9 @@ public class UserController {
         return userRepository.save(user);
     }
     @DeleteMapping(value = "/{uid}")//删
-    public void delUser(@PathVariable("uid") Integer uid
+    public List<User> delUser(@PathVariable("uid") Integer uid
     ) {
         userRepository.deleteById(uid);
+        return userRepository.findAll();
     }
 }
