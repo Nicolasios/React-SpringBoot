@@ -1,0 +1,9 @@
+
+# dependencies
+ty-web/node_modules
+
+
+# production
+ty-web/build
+
+ty-service/target
